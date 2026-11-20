@@ -158,44 +158,14 @@ var FB = {"hero-hall": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA
   function setCounter(counter, value) {
     counter.el.textContent = String(value).padStart(counter.digits, '0') + counter.suffix;
   }
-  function animateCounter(counter) {
-    var start = null, duration = 1100;
-    function frame(now) {
-      if (start === null) start = now;
-      var progress = clamp((now - start) / duration, 0, 1);
-      setCounter(counter, Math.round(counter.target * (1 - Math.pow(1 - progress, 3))));
-      if (progress < 1) requestAnimationFrame(frame);
-      else setCounter(counter, counter.target);
-    }
-    requestAnimationFrame(frame);
-  }
-  if (reduce || !('IntersectionObserver' in window)) {
-    counters.forEach(function (counter) { setCounter(counter, counter.target); });
-  } else {
-    var counterIO = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          var counter = counters.filter(function (item) { return item.el === entry.target; })[0];
-          animateCounter(counter);
-          counterIO.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.35 });
-    counters.forEach(function (counter) { counterIO.observe(counter.el); });
-  }
+  counters.forEach(function (counter) { setCounter(counter, counter.target); });
 
-  /* ================= SMOOTH SCROLL ================= */
+  /* ================= SECTION SCROLL ================= */
   var lenis = null;
-  if (!reduce && window.Lenis) {
-    lenis = new Lenis({ duration: 1.25, easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); }, smoothWheel: true, wheelMultiplier: 1, touchMultiplier: 1.4 });
-    (function raf(time) { lenis.raf(time); requestAnimationFrame(raf); })(performance.now());
-  }
   window.__scrollTo = function (target) {
     var el = typeof target === 'string' ? document.getElementById(target) : target; if (!el) return;
-    if (lenis) lenis.scrollTo(el, { offset: el.id === 'top' ? 0 : -72, duration: 1.7, easing: function (t) { return 1 - Math.pow(1 - t, 4); } });
-    else el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+    el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
   };
-  window.__lock = function (on) { if (lenis) { if (on) lenis.stop(); else lenis.start(); } };
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[href^="#"]'); if (!a) return;
     var id = a.getAttribute('href').slice(1), el = id ? document.getElementById(id) : null;

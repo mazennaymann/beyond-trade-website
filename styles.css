@@ -1,21 +1,35 @@
 
   :root { color-scheme: dark; }
-  html { scroll-behavior: smooth; scroll-padding-top: 5rem; background: #0D0D0D; }
+  html { scroll-behavior: smooth; scroll-padding-top: 0; scroll-snap-type: y mandatory; background: #0D0D0D; }
   body { margin: 0; background: #0D0D0D; color: #F4F0E8; font-family: Inter, system-ui, sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   ::selection { background: #C6A135; color: #0D0D0D; }
   :focus-visible { outline: 2px solid #C6A135; outline-offset: 3px; }
   img { display: block; max-width: 100%; }
-  #top { min-height: 100vh; min-height: 100svh; }
+  main > section {
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+  main > section, footer {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+  }
+  #top { overflow: hidden; }
+  footer {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
   /* design-system classes used by the original build */
   .container-x { width: 100%; max-width: 1360px; margin-inline: auto; padding-inline: 1.5rem; }
   @media (min-width: 768px) { .container-x { padding-inline: 2.5rem; } }
   @media (min-width: 1280px) { .container-x { padding-inline: 3.5rem; } }
-  .section-y { padding-block: 6rem; }
-  @media (min-width: 768px) { .section-y { padding-block: 9rem; } }
+  .section-y { padding-block: clamp(5.5rem, 7vw, 6.5rem) 2rem; }
   .eyebrow { font-family: Inter, sans-serif; font-size: .7rem; font-weight: 500; letter-spacing: .32em; text-transform: uppercase; color: #C6A135; line-height: 1.7; }
-  .display-xl { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 400; text-transform: uppercase; letter-spacing: .01em; line-height: .98; font-size: clamp(2.9rem, 8.4vw, 7.6rem); }
-  .display-lg { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 400; letter-spacing: .005em; line-height: 1.04; font-size: clamp(2.3rem, 5.4vw, 4.8rem); }
+  .display-xl { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 400; text-transform: uppercase; letter-spacing: .01em; line-height: .98; font-size: clamp(2.25rem, 5.6vw, 4.8rem); }
+  .display-lg { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 400; letter-spacing: .005em; line-height: 1.04; font-size: clamp(1.9rem, 4.2vw, 3.6rem); }
   .script-gold { font-family: "Cormorant Garamond", Georgia, serif; font-style: italic; font-weight: 400; color: #C6A135; }
   .gold-rule { height: 1px; background: #C6A135; }
   .logo-blend { mix-blend-mode: lighten; }
@@ -125,13 +139,13 @@
   }
 
   /* ======== compact editorial layout ======== */
-  html { scroll-padding-top: 6rem; }
+  html { scroll-padding-top: 0; }
   .section-y {
     position: relative;
     isolation: isolate;
-    padding-block: clamp(2.5rem, 3.2vw, 3.5rem);
+    padding-block: clamp(5.5rem, 7vw, 6.5rem) 2rem;
     background-image: radial-gradient(ellipse at 12% 0%, rgba(198,161,53,.035), transparent 42%);
-    scroll-margin-top: 6rem;
+    scroll-margin-top: 0;
   }
   .section-y::before {
     position: absolute;
@@ -144,22 +158,19 @@
     content: "";
   }
   .container-x { padding-inline: clamp(1rem, 3.2vw, 2.75rem); }
-  @media (min-width: 768px) {
-    .section-y { padding-block: clamp(2.75rem, 3.5vw, 3.75rem); }
-  }
-  .section-y .mt-20 { margin-top: 2.5rem; }
-  .section-y .mt-16 { margin-top: 2rem; }
-  .section-y .mt-14 { margin-top: 1.5rem; }
-  .section-y .mt-12 { margin-top: 1.5rem; }
-  .section-y .mt-10 { margin-top: 1.25rem; }
+  .section-y .mt-20 { margin-top: 1.5rem; }
+  .section-y .mt-16 { margin-top: 1.25rem; }
+  .section-y .mt-14 { margin-top: 1.125rem; }
+  .section-y .mt-12 { margin-top: 1rem; }
+  .section-y .mt-10 { margin-top: .875rem; }
   #about .mt-12.grid, #advisory .mt-12.grid, #workflow .mt-12.grid,
-  #pathways .mt-12.grid, #portfolio .mt-12.grid { gap: clamp(1.5rem, 2.6vw, 2.5rem); }
-  #about .mt-16.grid { margin-top: 2rem; gap: clamp(1.5rem, 2.8vw, 2.75rem); }
-  #about .mt-14.grid { margin-top: 1.5rem; }
-  #advisory ol li { padding-block: 1.15rem; }
-  #workflow .space-y-12 > :not([hidden]) ~ :not([hidden]) { margin-top: clamp(1.25rem, 2vw, 1.75rem); }
-  #pathways .mt-auto.pt-10 { padding-top: 1.5rem; }
-  #portfolio .mt-12.grid { row-gap: 2rem; }
+  #pathways .mt-12.grid, #portfolio .mt-12.grid { gap: clamp(1rem, 1.8vw, 1.5rem); }
+  #about .mt-16.grid { margin-top: 1.25rem; gap: clamp(1rem, 2vw, 1.5rem); }
+  #about .mt-14.grid { margin-top: 1rem; }
+  #advisory ol li { padding-block: .75rem; }
+  #workflow .space-y-12 > :not([hidden]) ~ :not([hidden]) { margin-top: clamp(.875rem, 1.4vw, 1.25rem); }
+  #pathways .mt-auto.pt-10 { padding-top: 1rem; }
+  #portfolio .mt-12.grid { row-gap: 1.25rem; }
 
   /* Eight collections: two columns on compact screens, four on desktop. */
   #collections .grid.mt-10 {
@@ -247,6 +258,11 @@
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
+  @media (min-width: 1200px) {
+    #portfolio .mt-12.grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
 
   /* Keep the four selected projects balanced without oversized image blocks. */
   #portfolio .zoom-frame {
@@ -288,4 +304,347 @@
   }
   @media (prefers-reduced-motion: reduce) {
     #collections .grid.mt-10 .zoom-frame img { transition: none; }
+  }
+
+  /* Compact section layouts keep full-screen snapping from hiding content. */
+  .section-y { padding-block: clamp(4.5rem, 5.5vw, 5rem) 1rem; }
+  .display-xl { font-size: clamp(2.4rem, 4.7vw, 4rem); }
+  .display-lg { font-size: clamp(2rem, 3.8vw, 3rem); }
+  .section-y .mt-20 { margin-top: 1rem; }
+  .section-y .mt-16 { margin-top: 1rem; }
+  .section-y .mt-14 { margin-top: .875rem; }
+  .section-y .mt-12 { margin-top: .875rem; }
+  .section-y .mt-10 { margin-top: .75rem; }
+
+  #about .mt-12.grid > .relative > div:first-child .zoom-frame {
+    aspect-ratio: 4 / 1;
+    height: auto;
+    min-height: 0;
+  }
+  #about .mt-12.grid > .relative > div:nth-child(2) {
+    margin-top: -2rem;
+    padding: .8rem;
+  }
+  #about .mt-12.grid > .relative > div:nth-child(2) p { font-size: .72rem; line-height: 1.45; }
+  #about .mt-14.grid > div { padding-top: .75rem; }
+  #about .mt-14.grid > div > span { font-size: 2.5rem; line-height: 1; }
+  #about .mt-14.grid > div > h3 { margin-top: .5rem; font-size: .66rem; letter-spacing: .14em; }
+  #about .mt-14.grid > div > p { margin-top: .5rem; font-size: .72rem; line-height: 1.45; }
+
+  #advisory .mt-12.grid { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); }
+  #advisory .mt-12.grid > * { grid-column: auto; }
+  #advisory .mt-12.grid > div:first-child .zoom-frame {
+    aspect-ratio: 1.7 / 1;
+    height: auto;
+    min-height: 0;
+  }
+  #advisory ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-content: center; gap: .25rem .75rem; }
+  #advisory ol li { grid-template-columns: 2.5rem minmax(0, 1fr); gap: .5rem; padding-block: .5rem; }
+  #advisory ol li > span:first-child { font-size: .75rem; }
+  #advisory ol li h3 { font-size: .85rem; line-height: 1.25; }
+  #advisory ol li p { font-size: .72rem; line-height: 1.4; }
+  #advisory .container-x > div:first-child > h2 { font-size: clamp(2rem, 3.8vw, 3.5rem); }
+  #advisory .container-x > div:first-child > p.mt-8 { margin-top: .75rem; font-size: .9rem; line-height: 1.55; }
+  #advisory .mt-14.border-y { padding-block: .75rem; }
+  #advisory > .container-x > p:last-child { margin-top: .5rem; font-size: .68rem; }
+
+  #workflow .mt-12.grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 1rem; }
+  #workflow .mt-12.grid > div:first-child > span { display: none; }
+  #workflow .mt-12.grid > div:first-child > ol {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .75rem;
+  }
+  #workflow .space-y-12 > :not([hidden]) ~ :not([hidden]) { margin-top: 0; }
+  #workflow .mt-12.grid > div:first-child > ol > div { margin: 0; }
+  #workflow .mt-12.grid > div:first-child > ol li {
+    grid-template-columns: 2.75rem minmax(0, 1fr);
+    gap: .5rem;
+  }
+  #workflow .mt-12.grid > div:first-child > ol li h3 { font-size: .88rem; line-height: 1.25; }
+  #workflow .mt-12.grid > div:first-child > ol li p { font-size: .72rem; line-height: 1.4; }
+  #workflow .mt-12.grid > div:nth-child(2) .zoom-frame { aspect-ratio: 1.8 / 1; min-height: 0; }
+
+  #collections .grid.mt-10 .zoom-frame { aspect-ratio: 2 / 1; }
+  #collections .grid.mt-10 > div > button > h3 { padding: .55rem; font-size: clamp(.85rem, 1.2vw, 1.1rem); }
+  #collections .grid.mt-10 > div > button > p { margin-top: .4rem; font-size: .68rem; line-height: 1.4; }
+
+  #pathways .mt-12.grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #pathways article > .zoom-frame { aspect-ratio: 2.4 / 1; }
+  #pathways article > div:nth-child(2) { padding: 1rem; }
+  #pathways article > div:nth-child(2) h3 { margin-top: .5rem; font-size: 1.15rem; line-height: 1.2; }
+  #pathways article > div:nth-child(2) > p:not(.eyebrow) { margin-top: .5rem; font-size: .78rem; line-height: 1.45; }
+  #pathways article > div:nth-child(2) ul { margin-top: .75rem; }
+  #pathways article > div:nth-child(2) ul > :not([hidden]) ~ :not([hidden]) { margin-top: .25rem; }
+  #pathways article > div:nth-child(2) li { font-size: .72rem; line-height: 1.35; }
+  #pathways .mt-auto.pt-10 { padding-top: .75rem; }
+  #pathways .mt-auto.pt-10 p { font-size: .62rem; }
+
+  #portfolio .mt-12.grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+  #portfolio .mt-12.grid > div { margin-top: 0; }
+  #portfolio .zoom-frame { aspect-ratio: 1.8 / 1; }
+  #portfolio .mt-12.grid > article > div { padding-left: .75rem; }
+  #portfolio > .container-x > p:last-child { margin-top: 1rem; }
+
+  #contact > .container-x {
+    display: grid;
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: 1rem;
+  }
+  #contact > .container-x > * { grid-column: auto; }
+  #contact form { padding: 1rem; }
+  #contact form > div:first-child { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; }
+  #contact form > div:first-child > label:last-child { grid-column: span 2; }
+  #contact form fieldset { margin-top: .75rem; }
+  #contact form fieldset > div { gap: .35rem; }
+  #contact form fieldset button { padding: .65rem .25rem; font-size: .58rem; letter-spacing: .08em; }
+  #contact form > label { margin-top: .75rem; }
+  #contact form textarea { height: 4rem; }
+  #contact .space-y-8 > :not([hidden]) ~ :not([hidden]) { margin-top: 1rem; }
+
+  @media (max-width: 767px) {
+    .section-y { padding-block: 4.5rem .75rem; }
+    .display-xl { font-size: clamp(1.7rem, 6.6vw, 2.4rem); }
+    .display-lg { font-size: clamp(1.65rem, 5vw, 2.25rem); }
+    .section-y .mt-20, .section-y .mt-16 { margin-top: .75rem; }
+    .section-y .mt-14, .section-y .mt-12, .section-y .mt-10 { margin-top: .625rem; }
+
+    #about .mt-12.grid { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: center; gap: .5rem; }
+    #about .mt-12.grid > * { grid-column: auto; }
+    #about .mt-12.grid > .relative > div:first-child .zoom-frame { aspect-ratio: 1.7 / 1; }
+    #about .mt-12.grid > .relative > div:nth-child(2) { margin-top: -.75rem; padding: .55rem; }
+    #about .mt-12.grid > .relative > div:nth-child(2) p { font-size: .62rem; }
+    #about .mt-12.grid > .relative > div:nth-child(2) .eyebrow { font-size: .56rem; }
+    #about .mt-12.grid > div:first-child > p.script-gold { font-size: 1.25rem; line-height: 1.1; }
+    #about .mt-12.grid > div:first-child .mt-10 { margin-top: .5rem; gap: .4rem; }
+    #about .mt-12.grid > div:first-child .mt-10 span { font-size: 2rem; }
+    #about .mt-12.grid > div:first-child .mt-10 > span:last-child {
+      flex: 1;
+      min-width: 0;
+      width: auto;
+      padding-bottom: 0;
+      font-size: .55rem;
+      line-height: 1.3;
+      letter-spacing: .08em;
+    }
+    #about .mt-16.grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; }
+    #about .mt-16.grid > p { font-size: .66rem; line-height: 1.35; }
+    #about .mt-14.grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; }
+    #about .mt-14.grid > div > span { font-size: 1.75rem; }
+    #about .mt-14.grid > div > h3 { font-size: .55rem; letter-spacing: .08em; line-height: 1.25; }
+    #about .mt-14.grid > div > p { font-size: .62rem; line-height: 1.35; }
+
+    #advisory .mt-12.grid { grid-template-columns: minmax(0, 1fr); gap: .5rem; }
+    #advisory .mt-12.grid > * { grid-column: auto; }
+    #advisory .mt-12.grid > div:first-child .zoom-frame { aspect-ratio: 2.4 / 1; }
+    #advisory ol { gap: .2rem .5rem; }
+    #advisory ol li { grid-template-columns: 1.75rem minmax(0, 1fr); gap: .35rem; padding-block: .35rem; }
+    #advisory ol li > span:first-child { font-size: .65rem; }
+    #advisory ol li h3 { font-size: .75rem; }
+    #advisory ol li p { font-size: .64rem; }
+
+    #workflow .mt-12.grid { grid-template-columns: minmax(0, 1fr); }
+    #workflow .mt-12.grid > div:nth-child(2) { display: none; }
+    #workflow .mt-12.grid > div:first-child > ol { gap: .5rem; }
+    #workflow .mt-12.grid > div:first-child > ol li { grid-template-columns: 2rem minmax(0, 1fr); gap: .35rem; }
+    #workflow .mt-12.grid > div:first-child > ol li > span:first-child { font-size: 1.5rem; }
+    #workflow .mt-12.grid > div:first-child > ol li h3 { font-size: .74rem; }
+    #workflow .mt-12.grid > div:first-child > ol li p { font-size: .62rem; }
+
+    #collections .container-x > div:first-child { gap: .5rem; }
+    #collections .container-x > div:first-child > p { font-size: .72rem; line-height: 1.35; }
+    #collections .grid.mt-10 { gap: .75rem .6rem; }
+    #collections .grid.mt-10 .zoom-frame { aspect-ratio: 1.8 / 1; }
+    #collections .grid.mt-10 > div > button > h3 { padding: .45rem; font-size: .78rem; }
+    #collections .grid.mt-10 > div > button > p { margin-top: .3rem; font-size: .62rem; }
+
+    #pathways .mt-12.grid { gap: .5rem; }
+    #pathways article > .zoom-frame { aspect-ratio: 2.2 / 1; }
+    #pathways article > div:nth-child(2) { padding: .65rem; }
+    #pathways article > div:nth-child(2) h3 { font-size: .9rem; }
+    #pathways article > div:nth-child(2) > p:not(.eyebrow) { font-size: .66rem; }
+    #pathways article > div:nth-child(2) ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .3rem; }
+    #pathways article > div:nth-child(2) ul > :not([hidden]) ~ :not([hidden]) { margin-top: 0; }
+    #pathways article > div:nth-child(2) li { font-size: .58rem; }
+    #pathways .mt-auto.pt-10 { padding-top: .5rem; }
+    #pathways .mt-auto.pt-10 p { font-size: .5rem; }
+
+    #portfolio .mt-12.grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+    #portfolio .zoom-frame { aspect-ratio: 1.8 / 1; }
+    #portfolio .mt-12.grid > div > article > div { margin-top: .4rem; padding-left: .5rem; }
+    #portfolio .mt-12.grid > div > article > div p:last-child { font-size: .66rem; line-height: 1.35; }
+
+    #contact > .container-x { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: .5rem; }
+    #contact > .container-x > div:first-child > h2 { font-size: clamp(1.45rem, 5vw, 2rem); }
+    #contact > .container-x > div:first-child > p:not(.script-gold) { font-size: .68rem; line-height: 1.45; }
+    #contact .space-y-8 > :not([hidden]) ~ :not([hidden]) { margin-top: .65rem; }
+    #contact form { padding: .65rem; }
+    #contact form label .eyebrow { font-size: .5rem; letter-spacing: .12em; }
+    #contact form input { padding-block: .4rem; font-size: .7rem; }
+    #contact form fieldset legend { font-size: .52rem; letter-spacing: .12em; }
+    #contact form fieldset button { padding: .5rem .15rem; font-size: .5rem; }
+    #contact form > label textarea { height: 3rem; }
+    #contact form > div:last-child { gap: .35rem; }
+    #contact form > div:last-child button, #contact form > div:last-child a { padding: .65rem .35rem; font-size: .5rem; letter-spacing: .08em; }
+  }
+  @media (max-width: 767px) and (max-height: 700px) {
+    .section-y { padding-block: 3.6rem .25rem; }
+    #top .display-xl { font-size: clamp(1.55rem, 5.8vw, 2.1rem); }
+    #about .mt-12.grid { gap: .35rem; }
+    #about .mt-12.grid > .relative > div:first-child .zoom-frame { aspect-ratio: 2.4 / 1; }
+    #about .mt-12.grid > .relative > div:nth-child(2) { margin-top: -.5rem; padding: .4rem; }
+    #about .mt-12.grid > .relative > div:nth-child(2) p { font-size: .54rem; }
+    #about .mt-14.grid > div { padding-top: .4rem; }
+    #about .mt-14.grid > div > span { font-size: 1.5rem; }
+    #about .mt-14.grid > div > h3 { margin-top: .3rem; font-size: .5rem; }
+    #about .mt-14.grid > div > p { margin-top: .3rem; font-size: .56rem; }
+    #advisory .container-x > div:first-child > h2 { font-size: 1.8rem; }
+    #advisory .container-x > div:first-child > p.mt-8 { margin-top: .4rem; font-size: .7rem; line-height: 1.35; }
+    #advisory .mt-12.grid > div:first-child { display: none; }
+    #advisory .mt-14.border-y { padding-block: .4rem; }
+    #advisory .mt-14.border-y p { font-size: 1rem; line-height: 1.2; }
+    #advisory > .container-x > p:last-child { font-size: .58rem; line-height: 1.3; }
+    #collections .container-x > div:first-child { gap: .35rem; }
+    #collections .container-x > div:first-child > p { font-size: .66rem; }
+    #collections .grid.mt-10 .zoom-frame { aspect-ratio: 2.5 / 1; }
+    #collections .grid.mt-10 > div > button > h3 { padding: .3rem; font-size: .7rem; }
+    #collections .grid.mt-10 > div > button > p { margin-top: .2rem; font-size: .56rem; line-height: 1.25; }
+    #pathways .container-x > div:first-child h2 { font-size: 1.55rem; }
+    #pathways article > .zoom-frame { aspect-ratio: 2.8 / 1; }
+    #pathways article > div:nth-child(2) { padding: .45rem; }
+    #pathways article > div:nth-child(2) h3 { font-size: .78rem; }
+    #pathways article > div:nth-child(2) > p:not(.eyebrow) { font-size: .58rem; line-height: 1.3; }
+    #pathways article > div:nth-child(2) ul { margin-top: .45rem; }
+    #pathways article > div:nth-child(2) li { font-size: .52rem; line-height: 1.2; }
+    #pathways .mt-auto.pt-10 { padding-top: .35rem; }
+    #pathways .mt-auto.pt-10 p { font-size: .42rem; letter-spacing: .04em; }
+  }
+  @media (max-width: 350px) {
+    #about .container-x > div:first-child > p.script-gold { font-size: .58rem; letter-spacing: .1em; }
+    #about .container-x > div:first-child > h2 { font-size: 1.45rem; }
+    #about .mt-16.grid > p { font-size: .56rem; line-height: 1.2; }
+    #about .mt-14.grid > div { padding-top: .25rem; }
+    #about .mt-14.grid > div > span { font-size: 1.25rem; }
+    #about .mt-14.grid > div > h3 { font-size: .46rem; }
+    #about .mt-14.grid > div > p { font-size: .5rem; }
+
+    #pathways article > .zoom-frame,
+    #pathways article > div:nth-child(2) > p:not(.eyebrow) { display: none; }
+    #pathways article > div:nth-child(2) ul { grid-template-columns: minmax(0, 1fr); }
+    #pathways .mt-auto.pt-10 p { font-size: .36rem; letter-spacing: 0; }
+
+    #portfolio .zoom-frame { aspect-ratio: 2.4 / 1; }
+    #portfolio .mt-12.grid > div > article > div { margin-top: .25rem; padding-left: .35rem; }
+    #portfolio .mt-12.grid > div > article > div p:last-child { font-size: .52rem; line-height: 1.2; }
+
+    #contact > .container-x { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
+    #contact > .container-x > div:first-child > h2 { font-size: 1.35rem; }
+    #contact > .container-x > div:first-child > p:not(.script-gold) { margin-top: .5rem; font-size: .58rem; }
+    #contact .space-y-8 > :not([hidden]) ~ :not([hidden]) { margin-top: .45rem; }
+    #contact form { padding: .4rem; }
+    #contact form > div:last-child button, #contact form > div:last-child a { padding: .5rem .15rem; font-size: .42rem; }
+  }
+
+  /* Keep active step emphasis on the numerals, not the accompanying copy. */
+  #workflow .mt-12.grid > div:first-child > ol li { grid-template-columns: 3rem minmax(0, 1fr); }
+  #workflow li > span:first-child {
+    display: grid;
+    width: 2.5rem;
+    height: 2.5rem;
+    place-items: center;
+    border: 1px solid rgba(198,161,53,.3);
+    border-radius: 50%;
+    background: transparent;
+    color: rgba(216,188,98,.85);
+    font-size: .9rem;
+    line-height: 1;
+    box-shadow: none;
+    transform: none;
+  }
+  #workflow li.step-active > span:first-child {
+    border-color: rgba(216,188,98,.75);
+    background: rgba(198,161,53,.07);
+    color: #E3CB7B;
+    box-shadow: 0 0 0 3px rgba(198,161,53,.07), 0 0 12px rgba(198,161,53,.1);
+    transform: none;
+  }
+  #workflow li.step-active > span:not(:first-child) {
+    background: transparent;
+    color: inherit;
+    box-shadow: none;
+    transform: none;
+  }
+
+  #advisory ol li > span:first-child {
+    display: flex;
+    width: 2.1rem;
+    min-height: 1.7rem;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgba(198,161,53,.28);
+    background: transparent;
+    color: rgba(216,188,98,.82);
+    font-size: .78rem;
+    line-height: 1;
+    box-shadow: none;
+    transform: none;
+  }
+  #advisory ol li.step-active > span:first-child {
+    border-bottom-color: rgba(216,188,98,.8);
+    background: transparent;
+    color: #E3CB7B;
+    text-shadow: 0 0 8px rgba(198,161,53,.2);
+    box-shadow: none;
+    transform: none;
+  }
+
+  .eyebrow { font-size: .72rem; }
+  .section-y p:not(.eyebrow):not(.script-gold) { font-size: calc(1em + 1px); }
+  #about .mt-14.grid > div > p { font-size: .78rem; }
+  #advisory ol li h3 { font-size: .92rem; }
+  #advisory ol li p { font-size: .8rem; }
+  #workflow .mt-12.grid > div:first-child > ol li h3 { font-size: .94rem; }
+  #workflow .mt-12.grid > div:first-child > ol li p { font-size: .8rem; }
+  #collections .grid.mt-10 > div > button > p { font-size: .74rem; }
+  #pathways article > div:nth-child(2) h3 { font-size: 1.2rem; }
+  #pathways article > div:nth-child(2) > p:not(.eyebrow) { font-size: .84rem; }
+  #pathways article > div:nth-child(2) li { font-size: .78rem; }
+  #pathways .mt-auto.pt-10 p { font-size: .68rem; }
+  #portfolio .mt-12.grid > div > article > div p:last-child { font-size: .72rem; }
+
+  @media (max-width: 767px) {
+    #workflow .mt-12.grid > div:first-child > ol li { grid-template-columns: 2.5rem minmax(0, 1fr); }
+    #workflow li > span:first-child { width: 2rem; height: 2rem; font-size: .72rem; }
+    #workflow .mt-12.grid > div:first-child > ol li h3 { font-size: .8rem; }
+    #workflow .mt-12.grid > div:first-child > ol li p { font-size: .7rem; }
+    #advisory ol li > span:first-child { width: 1.75rem; min-height: 1.5rem; font-size: .68rem; }
+    #advisory ol li h3 { font-size: .8rem; }
+    #advisory ol li p { font-size: .7rem; }
+    #about .mt-14.grid > div > p { font-size: .68rem; }
+    #collections .grid.mt-10 > div > button > p { font-size: .68rem; }
+    #pathways article > div:nth-child(2) h3 { font-size: .94rem; }
+    #pathways article > div:nth-child(2) > p:not(.eyebrow) { font-size: .72rem; }
+    #pathways article > div:nth-child(2) li { font-size: .64rem; }
+    #pathways .mt-auto.pt-10 p { font-size: .56rem; }
+    #portfolio .mt-12.grid > div > article > div p:last-child { font-size: .72rem; }
+  }
+
+  @media (max-width: 350px) {
+    #workflow .mt-12.grid > div:first-child > ol li { grid-template-columns: 2.25rem minmax(0, 1fr); }
+    #workflow li > span:first-child { width: 1.8rem; height: 1.8rem; font-size: .66rem; }
+    #workflow .mt-12.grid > div:first-child > ol li h3 { font-size: .72rem; }
+    #workflow .mt-12.grid > div:first-child > ol li p { font-size: .64rem; }
+    #advisory ol li h3 { font-size: .74rem; }
+    #advisory ol li p { font-size: .64rem; }
+    #about .mt-14.grid > div > p { font-size: .54rem; }
+    #collections .grid.mt-10 > div > button > p { font-size: .62rem; }
+    #pathways article > div:nth-child(2) h3 { font-size: .82rem; }
+    #pathways article > div:nth-child(2) li { font-size: .58rem; }
+    #portfolio .mt-12.grid > div > article > div p:last-child { font-size: .58rem; }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    #about .mt-12.grid { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); }
+    #about .mt-12.grid > * { grid-column: auto; }
+    #collections .grid.mt-10 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   }
