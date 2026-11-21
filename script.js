@@ -236,8 +236,8 @@ var FB = {"hero-hall": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA
     var stepIO = new IntersectionObserver(function (es) {
       es.forEach(function (e) { e.target.classList.toggle('step-active', e.isIntersecting); });
     }, { rootMargin: '-42% 0px -42% 0px' });
-    $$('#workflow li, #advisory ol li').forEach(function (li) { stepIO.observe(li); });
-  } else { $$('#workflow li, #advisory ol li').forEach(function (li) { li.classList.add('step-active'); }); }
+    $$('#workflow .workflow-step, #advisory ol li').forEach(function (li) { stepIO.observe(li); });
+  } else { $$('#workflow .workflow-step, #advisory ol li').forEach(function (li) { li.classList.add('step-active'); }); }
 
   /* ================= MICRO-INTERACTIONS ================= */
   if (!reduce && fine) {
